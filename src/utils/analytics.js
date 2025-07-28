@@ -183,19 +183,24 @@ export function initAnalytics() {
     // First Input Delay (FID)
     let firstInputDelay = null
     const measureFID = (event) => {
-      if (firstInputDelay === null) {
+      if (firstInputDelay === null && event && event.timeStamp) {
         firstInputDelay = performance.now() - event.timeStamp
         trackEvent('Core Web Vitals', 'FID', 'milliseconds', firstInputDelay)
-        
+
         // Remove listeners after first measurement
         ['mousedown', 'keydown', 'touchstart', 'pointerdown'].forEach(type => {
           document.removeEventListener(type, measureFID, true)
         })
       }
     }
-    
+
+    // Add event listeners with error handling
     ['mousedown', 'keydown', 'touchstart', 'pointerdown'].forEach(type => {
-      document.addEventListener(type, measureFID, true)
+      try {
+        document.addEventListener(type, measureFID, true)
+      } catch (error) {
+        console.warn(`Failed to add ${type} event listener:`, error)
+      }
     })
     
     // Cumulative Layout Shift (CLS)

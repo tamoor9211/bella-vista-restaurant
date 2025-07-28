@@ -67,7 +67,6 @@ function initNavigation() {
     if (link) {
       e.preventDefault()
       const targetPage = link.getAttribute('href').substring(1)
-      console.log('Navigating to:', targetPage)
       navigateToPage(targetPage)
     }
   })
@@ -84,23 +83,33 @@ function initNavigation() {
 
   // Close mobile menu when clicking outside
   document.addEventListener('click', (e) => {
+    const mobileMenuElement = document.getElementById('mobile-menu')
     if (!e.target.closest('#mobile-menu') && !e.target.closest('#mobile-menu-btn')) {
-      mobileMenu?.classList.add('hidden')
+      mobileMenuElement?.classList.add('hidden')
     }
   })
 }
 
 // Navigation function
 function navigateToPage(page) {
-  currentPage = page
-  updateActiveNavLinks()
-  renderCurrentPage()
+  try {
+    currentPage = page
+    updateActiveNavLinks()
+    renderCurrentPage()
 
-  // Close mobile menu
-  document.getElementById('mobile-menu')?.classList.add('hidden')
+    // Close mobile menu
+    const mobileMenu = document.getElementById('mobile-menu')
+    if (mobileMenu) {
+      mobileMenu.classList.add('hidden')
+    }
 
-  // Scroll to top
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+
+    console.log('Navigated to:', page)
+  } catch (error) {
+    console.error('Error navigating to page:', page, error)
+  }
 }
 
 // Update active navigation links
@@ -120,92 +129,127 @@ function updateActiveNavLinks() {
 function renderCurrentPage() {
   const app = document.querySelector('#app')
 
-  switch (currentPage) {
-    case 'home':
-      app.innerHTML = renderHomePage()
-      // Initialize homepage features after rendering
+  if (!app) {
+    console.error('App element not found!')
+    return
+  }
+
+  try {
+    let content = ''
+    let initFunction = null
+
+    switch (currentPage) {
+      case 'home':
+        content = renderHomePage()
+        initFunction = initHomepageFeatures
+        break
+      case 'menu':
+        content = renderMenuPage()
+        initFunction = initMenuPage
+        break
+      case 'about':
+        content = renderAboutPage()
+        initFunction = initAboutPage
+        break
+      case 'gallery':
+        content = renderGalleryPage()
+        initFunction = initGalleryPage
+        break
+      case 'contact':
+        content = renderContactPage()
+        initFunction = initContactPage
+        break
+      case 'mobile-test':
+        content = renderMobileTestPage()
+        initFunction = initMobileTestPage
+        break
+      default:
+        content = renderHomePage()
+        currentPage = 'home'
+        initFunction = initHomepageFeatures
+    }
+
+    // Set the content
+    app.innerHTML = content
+
+    // Initialize page-specific features after a short delay
+    if (initFunction) {
       setTimeout(() => {
-        initHomepageFeatures()
+        try {
+          initFunction()
+        } catch (error) {
+          console.warn('Error initializing page features:', error)
+        }
       }, 100)
-      break
-    case 'menu':
-      app.innerHTML = renderMenuPage()
-      // Initialize menu page features after rendering
-      setTimeout(() => {
-        initMenuPage()
-      }, 100)
-      break
-    case 'about':
-      app.innerHTML = renderAboutPage()
-      // Initialize about page features after rendering
-      setTimeout(() => {
-        initAboutPage()
-      }, 100)
-      break
-    case 'gallery':
-      app.innerHTML = renderGalleryPage()
-      // Initialize gallery page features after rendering
-      setTimeout(() => {
-        initGalleryPage()
-      }, 100)
-      break
-    case 'contact':
-      app.innerHTML = renderContactPage()
-      // Initialize contact page features after rendering
-      setTimeout(() => {
-        initContactPage()
-      }, 100)
-      break
-    case 'mobile-test':
-      app.innerHTML = renderMobileTestPage()
-      // Initialize mobile test page features after rendering
-      setTimeout(() => {
-        initMobileTestPage()
-      }, 100)
-      break
-    default:
-      app.innerHTML = renderHomePage()
-      setTimeout(() => {
-        initHomepageFeatures()
-      }, 100)
+    }
+
+    console.log('Page rendered:', currentPage)
+  } catch (error) {
+    console.error('Error rendering page:', error)
+    app.innerHTML = `
+      <div class="pt-20 min-h-screen flex items-center justify-center">
+        <div class="text-center">
+          <h1 class="text-2xl font-bold text-red-600 mb-4">Error loading page</h1>
+          <p class="text-gray-600">Please try refreshing the page.</p>
+        </div>
+      </div>
+    `
   }
 }
 
 // Initialize app
 function initApp() {
   console.log('Initializing app...')
-  initNavigation()
-  renderCurrentPage()
-  updateActiveNavLinks()
 
-  // Initialize mobile testing and optimizations
-  initMobileTesting()
+  try {
+    // First ensure we have the app element
+    const app = document.querySelector('#app')
+    if (!app) {
+      console.error('App element not found!')
+      return
+    }
 
-  // Initialize performance optimizations
-  initPerformanceOptimizations()
+    // Initialize navigation first
+    initNavigation()
 
-  // Initialize SEO optimizations
-  initSEOOptimizations()
+    // Render the current page (should be home by default)
+    renderCurrentPage()
+    updateActiveNavLinks()
 
-  // Initialize analytics tracking
-  initAnalytics()
+    // Initialize other features
+    initMobileTesting()
+    initPerformanceOptimizations()
+    initSEOOptimizations()
+    initAnalytics()
 
-  // Make navigation function globally available for debugging
-  window.navigateToPage = navigateToPage
-  window.getCurrentPage = () => currentPage
+    // Make navigation function globally available for debugging
+    window.navigateToPage = navigateToPage
+    window.getCurrentPage = () => currentPage
 
-  console.log('App initialized successfully!')
+    console.log('App initialized successfully!')
+  } catch (error) {
+    console.error('Error initializing app:', error)
+    // Fallback: render a simple error message
+    const app = document.querySelector('#app')
+    if (app) {
+      app.innerHTML = `
+        <div class="pt-20 min-h-screen flex items-center justify-center">
+          <div class="text-center">
+            <h1 class="text-2xl font-bold text-red-600 mb-4">Error loading application</h1>
+            <p class="text-gray-600">Please refresh the page to try again.</p>
+          </div>
+        </div>
+      `
+    }
+  }
 }
 
 // Start the app when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('DOM loaded, initializing app...')
-  initApp()
-})
-
-// Fallback if DOMContentLoaded already fired
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initApp)
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing app...')
+    initApp()
+  })
 } else {
   console.log('DOM already ready, initializing app...')
   initApp()
