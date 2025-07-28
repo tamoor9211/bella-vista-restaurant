@@ -28,16 +28,35 @@ function initNavigation() {
   const style = document.createElement('style')
   style.textContent = `
     .nav-link {
-      @apply text-gray-600 hover:text-orange-600 px-3 py-2 text-sm font-medium transition-colors duration-200;
+      color: #4b5563;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      text-decoration: none;
+    }
+    .nav-link:hover {
+      color: #f97316;
     }
     .nav-link.active {
-      @apply text-orange-600 font-semibold;
+      color: #f97316;
+      font-weight: 600;
     }
     .mobile-nav-link {
-      @apply text-gray-600 hover:text-orange-600 block px-3 py-2 text-base font-medium transition-colors duration-200;
+      color: #4b5563;
+      display: block;
+      padding: 0.5rem 0.75rem;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      text-decoration: none;
+    }
+    .mobile-nav-link:hover {
+      color: #f97316;
     }
     .mobile-nav-link.active {
-      @apply text-orange-600 font-semibold;
+      color: #f97316;
+      font-weight: 600;
     }
   `
   document.head.appendChild(style)
@@ -47,6 +66,7 @@ function initNavigation() {
     if (e.target.matches('a[href^="#"]')) {
       e.preventDefault()
       const targetPage = e.target.getAttribute('href').substring(1)
+      console.log('Navigating to:', targetPage)
       navigateToPage(targetPage)
     }
   })
@@ -170,4 +190,15 @@ function initApp() {
 }
 
 // Start the app when DOM is loaded
-document.addEventListener('DOMContentLoaded', initApp)
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOM loaded, initializing app...')
+  initApp()
+})
+
+// Fallback if DOMContentLoaded already fired
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp)
+} else {
+  console.log('DOM already ready, initializing app...')
+  initApp()
+}
