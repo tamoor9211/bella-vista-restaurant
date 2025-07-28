@@ -63,9 +63,10 @@ function initNavigation() {
 
   // Handle navigation clicks
   document.addEventListener('click', (e) => {
-    if (e.target.matches('a[href^="#"]')) {
+    const link = e.target.closest('a[href^="#"]')
+    if (link) {
       e.preventDefault()
-      const targetPage = e.target.getAttribute('href').substring(1)
+      const targetPage = link.getAttribute('href').substring(1)
       console.log('Navigating to:', targetPage)
       navigateToPage(targetPage)
     }
@@ -172,6 +173,7 @@ function renderCurrentPage() {
 
 // Initialize app
 function initApp() {
+  console.log('Initializing app...')
   initNavigation()
   renderCurrentPage()
   updateActiveNavLinks()
@@ -187,6 +189,12 @@ function initApp() {
 
   // Initialize analytics tracking
   initAnalytics()
+
+  // Make navigation function globally available for debugging
+  window.navigateToPage = navigateToPage
+  window.getCurrentPage = () => currentPage
+
+  console.log('App initialized successfully!')
 }
 
 // Start the app when DOM is loaded
