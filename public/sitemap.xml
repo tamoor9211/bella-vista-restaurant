@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://bellavista.com/</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://bellavista.com/images/restaurant-hero.jpg</image:loc>
+      <image:title>Bella Vista Restaurant - Authentic Italian Dining</image:title>
+      <image:caption>Beautiful restaurant interior with warm lighting and elegant decor</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Menu Page -->
+  <url>
+    <loc>https://bellavista.com/#menu</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://bellavista.com/images/signature-pasta.jpg</image:loc>
+      <image:title>Authentic Italian Menu - Bella Vista Restaurant</image:title>
+      <image:caption>Fresh handmade pasta and traditional Italian dishes</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- About Page -->
+  <url>
+    <loc>https://bellavista.com/#about</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://bellavista.com/images/chef-team.jpg</image:loc>
+      <image:title>Our Story - Bella Vista Restaurant Team</image:title>
+      <image:caption>Meet our passionate team of Italian chefs and staff</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Gallery Page -->
+  <url>
+    <loc>https://bellavista.com/#gallery</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://bellavista.com/images/gallery-food-1.jpg</image:loc>
+      <image:title>Food Gallery - Bella Vista Restaurant</image:title>
+      <image:caption>Beautiful presentation of our signature Italian dishes</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://bellavista.com/images/gallery-interior-1.jpg</image:loc>
+      <image:title>Restaurant Interior - Bella Vista</image:title>
+      <image:caption>Elegant dining room with warm Italian atmosphere</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Contact Page -->
+  <url>
+    <loc>https://bellavista.com/#contact</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Menu Categories (if they become separate pages) -->
+  <url>
+    <loc>https://bellavista.com/#menu/appetizers</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://bellavista.com/#menu/pasta</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://bellavista.com/#menu/pizza</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://bellavista.com/#menu/desserts</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://bellavista.com/#menu/drinks</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>

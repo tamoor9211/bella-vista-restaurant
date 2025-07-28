@@ -1,0 +1,11 @@
+# Netlify redirects for SPA routing
+/*    /index.html   200
+
+# API redirects (if needed later)
+/api/*  /.netlify/functions/:splat  200
+
+# Redirect old URLs (examples)
+/menu.html  /#menu  301
+/about.html /#about 301
+/contact.html /#contact 301
+/gallery.html /#gallery 301
